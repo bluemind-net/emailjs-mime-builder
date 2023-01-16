@@ -1,5 +1,5 @@
 declare class Builder {
-    constructor(contetnType: string);
+    constructor(contentType: string, options?: object);
     build(): string;
     setContent(content: string | Uint8Array);
     setHeader(name: string, value: string);
