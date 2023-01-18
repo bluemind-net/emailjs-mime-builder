@@ -484,12 +484,39 @@ describe('Mimebuilder', function () {
           'Date: 12345\r\n' +
           'Message-Id: <67890>\r\n' +
           '\r\n' +
-          'Hello world!\r\n' +
-          '\r\n' +
-          '--abc--' +
-          '\r\n'
+          'Hello world!'
 
       mb.boundary = 'abc'
+
+      expect(mb.build()).to.equal(expected)
+    })
+
+    it('should prevent content re-encoding when isEncoded option is true', function () {
+      const mb = new Mimebuilder('image/png', { isEncoded: true })
+        .setHeader('content-transfer-encoding', 'base64')
+        .setContent('myb64!')
+      const expected = 'Content-Type: image/png\r\n' +
+            'Content-Transfer-Encoding: base64\r\n' +
+            '\r\n' +
+            'myb64!'
+      expect(mb.build()).to.equal(expected)
+    })
+
+    it('should build multipart node with content but no children', function () {
+      const content = '--abc\r\n' +
+       'Content-Type: text/plain; charset=utf-8\r\n' +
+       'Content-Transfer-Encoding: quoted-printable\r\n\r\n' +
+       'hello world\r\n' +
+       '--abc\r\n' +
+       'Content-Type: text/html; charset=utf-8\r\n' +
+       'Content-Transfer-Encoding: quoted-printable\r\n\r\n' +
+       '<div>hello world</div>\r\n'
+      '--abc--'
+      const mb = new Mimebuilder('multipart/alternative')
+        .setHeader('content-type', 'multipart/alternative; boundary="--=abc=--"')
+        .setContent(content)
+
+      const expected = 'Content-Type: multipart/alternative; boundary="--=abc=--"\r\n\r\n' + content
 
       expect(mb.build()).to.equal(expected)
     })

@@ -1,7 +1,7 @@
 {
   "name": "@bluemind/emailjs-mime-builder",
-  "version": "2.0.5-bluemind1",
-  "homepage": "https://github.com/emailjs/emailjs-mime-builder",
+  "version": "2.0.5-bluemind2",
+  "homepage": "https://github.com/bluemind-net/emailjs-mime-builder",
   "description": "emailjs-mime-builder is a low level rfc2822 message composer. Define your own mime tree, no magic included.",
   "author": "Andris Reinman <andris@kreata.ee>",
   "keywords": [
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/emailjs/emailjs-mime-builder.git"
+    "url": "git://github.com/bluemind-net/emailjs-mime-builder.git"
   },
   "publishConfig": {
     "registry":"https://forge.bluemind.net/nexus/repository/bm-npm/"
